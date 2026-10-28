@@ -50,10 +50,10 @@ Flash forward. The locals pressure Gurt to set up the planet's defence system.
 
 :: Ending {"position":"600,1375","size":"100,100"}
 <<if $final is "save">>
-  <<if $defence gt 7>>Ending 1: Gurt goes mad with control and becomes a recluse with his weapon.
+  <<if $defence gt 4>>Ending 1: Gurt goes mad with control and becomes a recluse with his weapon.
   <<else>>Ending 2: Gurt realizes morale is not enough and reinforces the defences. Radical supporters push him to extremism.<</if>>
 <<else>>
-  <<if $morale gt 7>>Ending 3: The locals are crushed, but slowly warm back up to Gurt.
+  <<if $morale gt 4>>Ending 3: The locals are crushed, but slowly warm back up to Gurt.
   <<else>>Ending 4: The locals are crushed, there are calls for his exile, and Gurt rules with an iron fist.<</if>>
 <</if>>
 
