@@ -1,0 +1,126 @@
+:: StoryTitle
+IAT210: Digital Game Project - Digital prototype handoff
+
+
+:: StoryData
+{
+  "ifid": "F9C95F53-B21E-467F-983F-A6E7FE3C0580",
+  "format": "SugarCube",
+  "format-version": "2.37.3",
+  "start": "Start",
+  "zoom": 1
+}
+
+
+:: Aftermath {"position":"600,1000","size":"100,100"}
+<<if $built>>
+The miners of the underworld are enraged and call for Gurt's retirement.
+
+<<if $pendant>>
+Gurt holds up Ulf's pendant in front of the crowd.
+
+<<link "Give an inspirational speech" "Moon">><<set $morale += 5>><</link>>
+
+<<link "Give a speech about power" "Moon">><<set $morale += 5>><<set $defence += 2>><</link>>
+<<else>>
+Gurt has no pendant. He fumbles a live broadcast and the locals lose faith (Local Morale -2).<<set $morale -= 2>>
+
+<<link "Continue" "Moon">><</link>>
+<</if>>
+<<else>>
+Bandits take a local hostage at a political hearing.
+
+<<if $incision>>
+Gurt's cut finger makes him fail the quick draw. The hostage is executed (Local Morale -3).<<set $morale -= 3>>
+<<else>>
+Gurt quick draws and shoots the bandits (Local Morale +2, Security + Defence +2).<<set $morale += 2>><<set $defence += 2>>
+<</if>>
+
+<<link "Continue" "Moon">><</link>>
+<</if>>
+
+
+:: Defence {"position":"600,875","size":"100,100"}
+Flash forward. The locals pressure Gurt to set up the planet's defence system.
+
+<<link "Set up the defence system" "Aftermath">><<set $defence += 5>><<set $built to true>><</link>>
+
+<<link "Refuse to set it up" "Aftermath">><<set $morale += 5>><</link>>
+
+
+:: Ending {"position":"600,1375","size":"100,100"}
+<<if $final is "save">>
+  <<if $defence gt 7>>Ending 1: Gurt goes mad with control and becomes a recluse with his weapon.
+  <<else>>Ending 2: Gurt realizes morale is not enough and reinforces the defences. Radical supporters push him to extremism.<</if>>
+<<else>>
+  <<if $morale gt 7>>Ending 3: The locals are crushed, but slowly warm back up to Gurt.
+  <<else>>Ending 4: The locals are crushed, there are calls for his exile, and Gurt rules with an iron fist.<</if>>
+<</if>>
+
+Gurt becomes dictator of T'Chanui either way.
+
+Final Local Morale: <<print $morale>>. Final Security + Defence: <<print $defence>>.
+
+
+:: Lair {"position":"600,1250","size":"100,100"}
+<<if $defence lt 3>>Many locals have been taken hostage.<</if>>
+
+The hideout is crumbling and the villain is escaping. Gurt can only do one thing.
+
+<<link "Chase the Head Bandit" "Ending">><<set $final to "pursue">><</link>>
+
+<<link "Save the locals" "Ending">><<set $final to "save">><</link>>
+
+
+:: Moon {"position":"600,1125","size":"100,100"}
+Local Morale: <<print $morale>>. Security + Defence: <<print $defence>>.
+
+Gurt's military finds the source of the raids: a lone moon. He decides to take the fight there.
+
+<<if $morale lt 3>>There is little support for the mission, and the bandits are notified.<</if>>
+
+<<link "Continue" "Lair">><</link>>
+
+
+
+:: Morning {"position":"600,750","size":"100,100"}
+Time to leave for the capital.
+
+<<if $ulfAngry>>Ulf is angry and does not say goodbye.<<else>>Ulf says goodbye and tells Gurt she will miss him.<</if>>
+
+<<link "Continue" "Defence">><</link>>
+
+
+:: Start {"position":"600,500","size":"100,100"}
+Dusty wind. Gurt walks into the Shining Star Bar and chats with the bartender about his election as Provincial Minister. Three drunk guys walk in.
+
+<<link "Pick the fight" "Ulf">><<set $defence += 1>><</link>>
+
+<<link "Defuse the situation" "Ulf">><<set $morale += 1>><<set $incision to true>><</link>>
+
+
+
+:: StoryInit {"position":"725,500","size":"100,100"}
+<<set $morale to 0>>
+<<set $defence to 0>>
+<<set $incision to false>>
+<<set $pendant to false>>
+<<set $ulfAngry to false>>
+<<set $built to false>>
+<<set $final to "none">>
+
+
+:: Ulf {"position":"600,625","size":"100,100"}
+Local Morale: <<print $morale>>. Security + Defence: <<print $defence>>.
+
+<<if $incision>>
+Ulf sees the cut on Gurt's finger and worries. Gurt learns she is terminally ill from the mines.
+
+<<link "Rub her back without a word" "Morning">><<set $ulfAngry to true>><</link>>
+
+<<link "Tell her not to worry" "Morning">><<set $pendant to true>><</link>>
+<<else>>
+Gurt lies to Ulf about the fight and goes to sleep.
+
+<<link "Go to sleep" "Morning">><</link>>
+<</if>>
